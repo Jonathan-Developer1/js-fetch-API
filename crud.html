@@ -9,7 +9,7 @@
 
   <body>
     <main>     
-      <!-- Enviar -->
+      <!-- Criar -->
        <h1>Postagens</h1>
 
       <button onclick="postPostagens()">Enviar</button>
@@ -31,6 +31,34 @@
         <p id="resLeitura"></p>
       </div>
       <!-- Fim da Leitura -->
+
+
+      <!-- Atualizar itens -->
+      <h1>Atualizar</h1>
+
+      <input id="numero2" type="number" min="1" max="100" value="1" />
+      <button onclick="modificarPostagens(numero.value)">Modificar</button>
+
+      <div id="resp">
+        <p class="campo">Resposta:</p>
+        <p id="resAtualizar"></p>
+      </div>
+      <!-- Fim do atualizar -->
+
+
+      <!-- Deletar Dados -->
+       <h1>Postagens</h1>
+
+      <input id="numero" type="number" min="1" max="100" value="1" />
+      <button onclick="removerPostagem(numero.value)">Remover</button>
+
+      <div id="resp">
+        <p class="campo">Resposta:</p>
+        <p id="resDelete"></p>
+      </div>
+      <!-- Fim do Deletar Dados -->
+
+      
       
     </main>
     <script src="crud.js"></script>

@@ -40,26 +40,50 @@ function imprimeVetor(objeto) {
   return mensagem;
 }
 
+function imprime(objeto) {
+        var mensagem = `
+      <br>
+      {
+        <br>
+        "<span class='campo'>id</span>": ${objeto.id},
+        <br>
+        "<span class='campo'>userId</span>": ${objeto.userId},
+        <br>
+        "<span class='campo'>title</span>": ${objeto.title},
+        <br>
+        "<span class='campo'>body</span>": ${objeto.body}
+        <br>
+      }
+      <br>`;
+
+        return mensagem;
+      }
 
 
-async function getPostagens() {
-  await fetch(`https://jsonplaceholder.typicode.com/posts`)
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json);
-      respjson.innerHTML = imprimeVetor(json);
-    });
-}
+// Deletar Dados
+function imprime(objeto) {
+        var mensagem = `
+      <br>
+      {
+        <br>
+        "<span class='campo'>id</span>": ${objeto.id},
+        <br>
+        "<span class='campo'>userId</span>": ${objeto.userId},
+        <br>
+        "<span class='campo'>title</span>": ${objeto.title},
+        <br>
+        "<span class='campo'>body</span>": ${objeto.body}
+        <br>
+      }
+      <br>`;
 
-async function getPostagem(id) {
-  await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json);
-      respjson.innerHTML = imprimeObjeto(json);
-    });
-}
+        return mensagem;
+      }
+// Fim do deletar dados
 
+
+
+// Criar
 async function postPostagens() {
   fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
@@ -78,8 +102,60 @@ async function postPostagens() {
       respjson.innerHTML = imprimeObjeto(json);
     });
 }
+// Fim da criação
 
-function processar() {
-  var id = document.getElementById ("numero")
-  
+
+// Leitura
+async function getPostagem() {
+  const numero = document.getElementById('numero').value;
+  fetch(`https://jsonplaceholder.typicode.com/posts/${numero}`)
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json);
+      if (json.id) {
+        document.getElementById('respjson').innerHTML = imprimeObjeto(json);
+      } else {
+        document.getElementById('respjson').innerHTML = "Postagem não encontrada!";
+      }
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar a postagem:', error);
+      document.getElementById('respjson').innerHTML = "Erro ao buscar a postagem.";
+    });
 }
+
+// Fim da leitura
+
+
+
+// Atualizar itens
+async function modificarPostagens(id) {
+        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+          body: JSON.stringify({
+            title: "Essa é a modificação da minha mais nova postagem! :D",
+          }),
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            respjson.innerHTML = imprime(json);
+          });
+      }
+// Fim de atualizar
+
+// Deletar dados
+ async function removerPostagem(id) {
+        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            respjson.innerHTML = imprime(json);
+          });
+      }
+// Fim do delete
